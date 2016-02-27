@@ -16,18 +16,20 @@ import android.widget.ListView;
 import android.widget.Toast;
 import com.igm.product.adapter.ProductArrayAdapter;
 import com.igm.product.app.DataHolder;
+import com.igm.product.dbhelper.DatabaseHelper;
 import com.igm.product.entity.Cart;
 import com.igm.product.entity.Part;
-import com.igm.product.entity.PartList;
 import com.igm.product.util.Constants;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Amir Nikjoo,  01/23/2016,  04:27 PM
  */
 public class ProductListActivity extends Activity {
-    private PartList parts;
+    //    private PartList parts;
+    private List<Part> parts;
     private ArrayList<Cart> cartList = new ArrayList<Cart>();
     ListView lv;
     ProductArrayAdapter adapter;
@@ -48,17 +50,10 @@ public class ProductListActivity extends Activity {
         lv = (ListView) findViewById(R.id.list);
 
         Bundle bundle = getIntent().getExtras();
-        String carName = "";
         Integer i = (Integer) bundle.get(Constants.INTENT_KEY_CAR_TYPE);
-        if (i == 1) {
-            parts = new PartList(1);
-        } else if (i == 2) {
-            parts = new PartList(2);
-        } else if (i == 3) {
-            parts = new PartList(3);
-        } else {
-            parts = new PartList(-1);
-        }
+
+        DatabaseHelper db = new DatabaseHelper(this);
+        parts = db.getAllPartsByCarType(i);
 
         adapter = new ProductArrayAdapter(this, parts);
         lv.setAdapter(adapter);
@@ -87,7 +82,7 @@ public class ProductListActivity extends Activity {
                     holder.setCartArrayList(cartList);
                     Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                     v.vibrate(50);
-                }  else
+                } else
                     Toast.makeText(getApplicationContext(), getString(R.string.already_added_to_cart), Toast.LENGTH_SHORT).show();
 
                 return true;

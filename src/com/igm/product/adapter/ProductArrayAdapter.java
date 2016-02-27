@@ -9,15 +9,19 @@ import com.igm.product.R;
 import com.igm.product.entity.Part;
 import com.igm.product.entity.PartList;
 
+import java.util.List;
+
 /**
  * User: Amir Nikjoo,  01/23/2016,  04:03 PM
  */
 public class ProductArrayAdapter extends BaseAdapter implements ListAdapter, Filterable {
     private final Context context;
-    private PartList parts;
-    private PartList allParts;
+//    private PartList parts;
+    private List<Part> parts;
+    private List<Part> allParts;
+//    private PartList allParts;
 
-    public ProductArrayAdapter(Context context, PartList values) {
+    public ProductArrayAdapter(Context context, List<Part> values) {
         this.context = context;
         this.parts = values;
         this.allParts = values;
@@ -88,7 +92,7 @@ public class ProductArrayAdapter extends BaseAdapter implements ListAdapter, Fil
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                parts = (PartList) filterResults.values;
+                parts = (List<Part>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

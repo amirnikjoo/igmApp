@@ -7,6 +7,6 @@
                android:background="@color/igm_dark_blue"/>
 
     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-               android:src="@drawable/igm_spalsh_logo"
-               android:layout_centerHorizontal="true" android:layout_centerVertical="true"/>
+               android:src="@drawable/igm_spalsh_logo2"
+               android:layout_centerHorizontal="true"/>
 </RelativeLayout>

@@ -13,11 +13,16 @@ public class Part implements Serializable, Parcelable{
     int id;
     String description;
     int carType;
+    int status;
 
-    public Part(int id, String description, int carType) {
+    public Part() {
+    }
+
+    public Part(int id, String description, int carType, int status) {
         this.id = id;
         this.description = description;
         this.carType = carType;
+        this.status = status;
     }
 
     public int getId() {
@@ -44,6 +49,14 @@ public class Part implements Serializable, Parcelable{
         this.carType = carType;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -54,12 +67,14 @@ public class Part implements Serializable, Parcelable{
         dest.writeInt(this.id);
         dest.writeString(this.description);
         dest.writeInt(this.carType);
+        dest.writeInt(this.status);
     }
 
     private Part(Parcel in) {
         this.id = in.readInt();
         this.description = in.readString();
         this.carType = in.readInt();
+        this.status = in.readInt();
     }
 
     public static final Creator<Part> CREATOR = new Creator<Part>() {
