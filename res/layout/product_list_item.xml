@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtCarType"
                 android:textSize="@dimen/normal_list_item"
-                android:textColor="@android:color/holo_red_light"
+                android:textColor="@color/igm_yellow"
                 android:text="@string/default_text_value"
                 android:layout_below="@id/textDescription"
                 android:layout_alignParentLeft="@id/textDescription"

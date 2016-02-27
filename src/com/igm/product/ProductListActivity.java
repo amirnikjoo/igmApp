@@ -128,34 +128,13 @@ public class ProductListActivity extends Activity {
         if (item.getItemId() == R.id.action_show_my_cart) {
             Intent i = new Intent(getBaseContext(), CartListActivity.class);
             startActivity(i);
+            overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+
         } else if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        Toast.makeText(this, getClass().getName() + " inside onResume", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-//        Toast.makeText(this, getClass().getName()+ " inside onStart", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        Toast.makeText(this, getClass().getName() + " inside onPause", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        Toast.makeText(this, getClass().getName() + " inside onStop", Toast.LENGTH_SHORT).show();
-    }
 }
 

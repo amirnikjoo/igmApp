@@ -9,6 +9,7 @@
 
         <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                   android:textSize="@dimen/normal_list_item" android:text="@string/show_cart"
+                  android:textColor="@color/igm_dark_blue"
                   android:id="@+id/txtSubject" android:gravity="center"
                 />
         <ListView android:layout_width="fill_parent"
@@ -31,7 +32,7 @@
                 android:layout_weight="1"
                 android:onClick="sendSms"
                 android:src="@drawable/send_sms"
-                android:background="@android:color/white"
+                android:background="@color/igm_pure_white"
                 android:contentDescription="SendSms"/>
 
         <ImageButton
@@ -41,7 +42,7 @@
                 android:layout_weight="1"
                 android:onClick="send2Telegram"
                 android:src="@drawable/send_telegram"
-                android:background="@android:color/white"
+                android:background="@color/igm_pure_white"
                 android:contentDescription="send2Telegram"/>
 
         <ImageButton
@@ -51,7 +52,7 @@
                 android:layout_weight="1"
                 android:onClick="sendEmail"
                 android:src="@drawable/send_email"
-                android:background="@android:color/white"
+                android:background="@color/igm_pure_white"
                 android:contentDescription="sendEmail"/>
 
         <ImageButton
@@ -61,7 +62,7 @@
                 android:layout_weight="1"
                 android:onClick="copy2Clipboard"
                 android:src="@drawable/send_clipboard"
-                android:background="@android:color/white"
+                android:background="@color/igm_pure_white"
                 android:contentDescription="copy2Clipboard"/>
 
     </LinearLayout>

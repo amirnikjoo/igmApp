@@ -29,28 +29,33 @@ public class MainActivity extends Activity {
         Intent i = new Intent(getBaseContext(), ProductListActivity.class);
         i.putExtra(Constants.INTENT_KEY_CAR_TYPE, 1);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_right);
     }
 
     public void showPeugeot(View view) {
         Intent i = new Intent(getBaseContext(), ProductListActivity.class);
         i.putExtra(Constants.INTENT_KEY_CAR_TYPE, 2);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_right);
     }
 
     public void showPride(View view) {
         Intent i = new Intent(getBaseContext(), ProductListActivity.class);
         i.putExtra(Constants.INTENT_KEY_CAR_TYPE, 3);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_right);
     }
 
     public void helpMe(View view) {
         Intent i = new Intent(getBaseContext(), HelpActivity.class);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_right);
     }
 
     public void aboutUs(View view) {
         Intent i = new Intent(getBaseContext(), AboutUsActivity.class);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_right);
     }
 
     @Override
@@ -66,6 +71,7 @@ public class MainActivity extends Activity {
         if (item.getItemId() == R.id.action_show_cart){
             Intent i = new Intent(getBaseContext(), CartListActivity.class);
             startActivity(i);
+            overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
         }
 
         return super.onOptionsItemSelected(item);
