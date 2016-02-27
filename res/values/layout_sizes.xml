@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="normal_list_item">20sp</dimen>
+    <dimen name="normal_sub_list_item">12sp</dimen>
+    <dimen name="version_size">8sp</dimen>
+    <dimen name="normalbutton">20sp</dimen>
+    <dimen name="normalbuttonmargin">10sp</dimen>
+    <dimen name="normalpadding">5dp</dimen>
+    <dimen name="normalmargin">5dp</dimen>
+    <dimen name="normalmargin_right">10dp</dimen>
+</resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/mLayoutBottomButtons">
+
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:textSize="@dimen/normal_list_item" android:text="@string/show_cart"
+                  android:id="@+id/txtSubject" android:gravity="center"
+                />
+        <ListView android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:id="@+id/cartList"
+                  android:layout_below="@id/txtSubject"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:id="@+id/mLayoutBottomButtons"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+        <ImageButton
+                android:id="@+id/btnSendSms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="sendSms"
+                android:src="@drawable/send_sms"
+                android:background="@android:color/white"
+                android:contentDescription="SendSms"/>
+
+        <ImageButton
+                android:id="@+id/btnTelegram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="send2Telegram"
+                android:src="@drawable/send_telegram"
+                android:background="@android:color/white"
+                android:contentDescription="send2Telegram"/>
+
+        <ImageButton
+                android:id="@+id/btnSendEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="sendEmail"
+                android:src="@drawable/send_email"
+                android:background="@android:color/white"
+                android:contentDescription="sendEmail"/>
+
+        <ImageButton
+                android:id="@+id/btnCopyToClipboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="copy2Clipboard"
+                android:src="@drawable/send_clipboard"
+                android:background="@android:color/white"
+                android:contentDescription="copy2Clipboard"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

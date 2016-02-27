@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IranianGM</string>
+    <string name="button_caption_daewoo_product">محصولات دوو</string>
+    <string name="button_caption_peugeot_product">محصولات پژو</string>
+    <string name="button_caption_pride_product">محصولات پراید</string>
+    <string name="button_caption_cart">سبد سفارش</string>
+    <string name="button_caption_about">درباره ما </string>
+    <string name="button_caption_help">راهنمای تصویری</string>
+    <string name="default_text_value">مقدار پیش فرض</string>
+    <string name="filter_hint">جستجو</string>
+    <string name="add_to_cart">به لیست سفارش اضافه شود</string>
+    <string name="show_cart"> سبد سفارش </string>
+    <string name="delete_all"> حذف همه</string>
+    <string name="send_to"> ارسال به</string>
+    <string name="setting">تنظیمات</string>
+    <string name="added_to_cart">به سفارش اضافه شد.</string>
+    <string name="input_quantity">لطفا تعداد مورد نظر را انتخاب کنید.</string>
+    <string name="btn_ok">تایید</string>
+    <string name="btn_cancel">انصراف</string>
+    <string name="already_added_to_cart">این قطعه قبلا به لیست اضافه شده است.</string>
+    <string name="reside_in_clipboard">لیست درخواستی در حافظه کپی شد.</string>
+    <string name="no_data_to_send">داده ای برای ارسال انتخاب نشده است.</string>
+    <string name="telegram_not_installed">تلگرام نصب نشده است.</string>
+    <string name="item_deleted">قطعه مورد نظر حذف شد.</string>
+    <string name="are_you_sure_to_delete_all">تمامی قطعات لیست حذف شوند؟</string>
+    <string name="positive_answer">بله</string>
+    <string name="negative_answer">خیر</string>
+    <string name="version">نسخه 1.0</string>
+    <string name="two_tap_to_exit">برای خروج دوبار کلید برگشت را فشار دهید.</string>
+</resources>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#dbe7ff"
+        >
+    <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView">
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                >
+<!--
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:src="@drawable/igm_logo3" android:id="@+id/image_logo1"
+                       android:layout_centerHorizontal="true"/>
+-->
+
+            <Button
+                    android:id="@+id/buttonDaewoo"
+                    android:text="@string/button_caption_daewoo_product"
+                    android:textColor="@color/igm_pure_white"
+                    android:textSize="@dimen/normalbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/normalbuttonmargin"
+                    android:onClick="showDaewoo"
+                    />
+            <Button
+                    android:id="@+id/buttonPeugeot"
+                    android:text="@string/button_caption_peugeot_product"
+                    android:textColor="@color/igm_pure_white"
+                    android:textSize="@dimen/normalbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/buttonDaewoo"
+                    android:layout_margin="@dimen/normalbuttonmargin"
+                    android:onClick="showPeugeot"
+                    />
+            <Button
+                    android:id="@+id/buttonPride"
+                    android:text="@string/button_caption_pride_product"
+                    android:textColor="@color/igm_pure_white"
+                    android:textSize="@dimen/normalbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/buttonPeugeot"
+                    android:layout_margin="@dimen/normalbuttonmargin"
+                    android:onClick="showPride"
+                    />
+
+            <Button
+                    android:id="@+id/buttonAbout"
+                    android:text="@string/button_caption_about"
+                    android:textColor="@color/igm_pure_white"
+                    android:textSize="@dimen/normalbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/buttonPride"
+                    android:layout_margin="@dimen/normalbuttonmargin"
+                    android:onClick="aboutUs"
+                    />
+            <Button
+                    android:id="@+id/buttonHelp"
+                    android:text="@string/button_caption_help"
+                    android:textColor="@color/igm_pure_white"
+                    android:textSize="@dimen/normalbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/buttonAbout"
+                    android:layout_margin="@dimen/normalbuttonmargin"
+                    android:onClick="helpMe"
+                    />
+            <TextView
+                    android:id="@+id/tvVersion"
+                    android:text="@string/version"
+                    android:textColor="#ffff000a"
+                    android:textSize="@dimen/version_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/buttonHelp"
+                    />
+            <!--
+
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                  android:textColor="@android:color/holo_blue_dark"
+                                  android:text="v1.0"
+                                  android:textSize="20dp"
+                                  android:layout_centerHorizontal="true"
+                                  android:id="@+id/tvVersion"
+                                  android:layout_below="@id/buttonAbout"
+                                  android:layout_margin="@dimen/normalmargin"/>
+            -->
+
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/product_list_item_selector"
+        >
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textDescription"
+                android:textSize="@dimen/normal_list_item"
+                android:textColor="@android:color/white"
+                android:text="@string/default_text_value"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/normalpadding"
+                android:layout_marginRight="@dimen/normalmargin"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtCarType"
+                android:textSize="@dimen/normal_list_item"
+                android:textColor="@android:color/holo_red_light"
+                android:text="@string/default_text_value"
+                android:layout_below="@id/textDescription"
+                android:layout_alignParentLeft="@id/textDescription"
+                android:padding="@dimen/normalpadding"
+                android:layout_marginLeft="@dimen/normalmargin"
+                />
+    </RelativeLayout>
+</LinearLayout>

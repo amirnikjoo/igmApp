@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="igm_dark_blue">#ff2d489a</color>
+    <color name="igm_light_blue">#ff6abfff</color>
+    <color name="igm_yellow">#fffaff1c</color>
+    <color name="igm_pure_white">#ffffffff</color>
+</resources>
