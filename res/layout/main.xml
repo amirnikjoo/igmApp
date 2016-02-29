@@ -95,6 +95,30 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/buttonHelp"
                     />
+
+            <TextView
+                    android:id="@+id/tvLastUpdate"
+                    android:textColor="#ffff000a"
+                    android:textSize="@dimen/version_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/tvVersion"
+                    />
+
+            <Button
+                    android:id="@+id/buttonReadJsonFromAsset"
+                    android:text="@string/button_read_url_json"
+                    android:textColor="@color/igm_pure_white"
+                    android:textSize="@dimen/normalbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/tvLastUpdate"
+                    android:layout_margin="@dimen/normalbuttonmargin"
+                    android:onClick="readJsonFromAsset"
+                    />
             <!--
 
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"

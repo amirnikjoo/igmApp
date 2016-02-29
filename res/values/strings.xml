@@ -28,4 +28,7 @@
     <string name="negative_answer">خیر</string>
     <string name="version">نسخه 1.0</string>
     <string name="two_tap_to_exit">برای خروج دوبار کلید برگشت را فشار دهید.</string>
+    <string name="button_read_url_json">خواندن از فایل آنلاین</string>
+    <string name="refresh_products"> به روز رسانی اطلاعات... </string>
+    <string name="internet_connection_not_present">اتصال به اینترنت برقرار نیست</string>
 </resources>

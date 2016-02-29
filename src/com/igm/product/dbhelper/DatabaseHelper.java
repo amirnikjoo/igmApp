@@ -7,14 +7,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.igm.product.entity.Part;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * User: Amir Nikjoo,  02/27/2016,  01:27 PM
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "db_product";
@@ -25,8 +27,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // last_edit Table - column
     private static final String KEY_LAST_EDIT_DATE_ID = "last_edit_date_id";
-
-    // common - columns
     private static final String COL_LAST_EDIT = "last_edit";
 
     // part Table - column
@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // tables create statement
     private static final String CREATE_TABLE_LAST_EDIT = "CREATE TABLE "
             + TABLE_LAST_EDIT + "(" + KEY_LAST_EDIT_DATE_ID + " INTEGER PRIMARY KEY," + COL_LAST_EDIT
-            + " INTEGER" + ")";
+            + " LONG" + ")";
 
     private static final String CREATE_TABLE_PARTS = "CREATE TABLE "
             + TABLE_PARTS + "(" + KEY_PART_ID + " INTEGER PRIMARY KEY," + COL_DESCRIPTION
@@ -53,6 +53,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // creating required tables
         db.execSQL(CREATE_TABLE_LAST_EDIT);
+//        insertLastEdit();
+        ContentValues values = new ContentValues();
+        values.put(KEY_LAST_EDIT_DATE_ID, 1);
+        values.put(COL_LAST_EDIT, Long.valueOf("201602010000"));
+        db.insert(TABLE_LAST_EDIT, null, values);
+
         db.execSQL(CREATE_TABLE_PARTS);
     }
 
@@ -74,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_DESCRIPTION, p.getDescription());
         values.put(COL_CAR_TYPE, p.getCarType());
         values.put(COL_STATUS, p.getStatus());
-        values.put(COL_LAST_EDIT, Integer.valueOf(getyyyyMMdd()));
+        values.put(COL_LAST_EDIT, getCustomDateTimeYYYYMMDDHHmm());
 
         return db.insert(TABLE_PARTS, null, values);
     }
@@ -96,6 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_DESCRIPTION, p.getDescription());
         values.put(COL_CAR_TYPE, p.getCarType());
         values.put(COL_STATUS, p.getStatus());
+        values.put(COL_LAST_EDIT, getCustomDateTimeYYYYMMDDHHmm());
 
         return db.update(TABLE_PARTS, values, KEY_PART_ID + " = ?", new String[]{String.valueOf(p.getId())});
     }
@@ -167,48 +174,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return p;
     }
 
-    public long updateLastModified(Part p) {
+    public long updateLastModified() {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COL_LAST_EDIT,Integer.valueOf(getyyyyMMdd()));
-        return db.update(TABLE_PARTS, values, "",null);
+        long currentTime = getCustomDateTimeYYYYMMDDHHmm();
+        values.put(COL_LAST_EDIT, currentTime);
+        db.update(TABLE_LAST_EDIT, values, "", null);
+        return currentTime;
     }
 
-    public long insertLastEdit() {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_LAST_EDIT_DATE_ID, 1);
-        values.put(COL_LAST_EDIT, Integer.valueOf(getyyyyMMdd()));
-        return db.insert(TABLE_LAST_EDIT, null, values);
-    }
-
-    public Integer getLastEditDate() {
-        String selectQuery = "SELECT " + COL_LAST_EDIT +
-                " FROM " + TABLE_LAST_EDIT;
+    public long getLastEditDate() {
+        String selectQuery = "SELECT " + COL_LAST_EDIT + " FROM " + TABLE_LAST_EDIT;
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Integer d = null;
+        Long d = 0L;
 
         Cursor c = db.rawQuery(selectQuery, null);
         if (c != null) {
             c.moveToFirst();
-            d = c.getInt(c.getColumnIndex(COL_LAST_EDIT));
+            d = c.getLong(c.getColumnIndex(COL_LAST_EDIT));
         }
-        // adding to tags list
         return d;
     }
 
-    public static String getyyyyMMdd() {
-        Calendar calendar = new GregorianCalendar();
+    public static long getCustomDateTimeYYYYMMDDHHmm() {
+        Calendar cal = Calendar.getInstance();
+        String date = "0";
         try {
-            return "" + calendar.get(Calendar.YEAR) +
-                    padding(("" + calendar.get(Calendar.DAY_OF_MONTH) + 1), 2) +
-                    padding(("" + calendar.get(Calendar.DAY_OF_MONTH)), 2);
+            date = cal.get(Calendar.YEAR) +
+                    padding("" + (cal.get(Calendar.MONTH) + 1), 2) +
+                    padding("" + (cal.get(Calendar.DAY_OF_MONTH)), 2) +
+                    padding("" + cal.get(Calendar.HOUR_OF_DAY), 2) +
+                    padding("" + cal.get(Calendar.MINUTE), 2);
         } catch (Exception e) {
-            return "20150101";
         }
+
+        return Long.valueOf(date);
     }
 
     public static String padding(String str, int len) {

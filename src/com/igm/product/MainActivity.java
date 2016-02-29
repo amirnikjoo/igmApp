@@ -2,20 +2,48 @@ package com.igm.product;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.*;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.igm.product.dbhelper.DatabaseHelper;
 import com.igm.product.entity.Part;
 import com.igm.product.util.Constants;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class MainActivity extends Activity {
+    // URL to get contacts JSON
+    private static String url = "http://iraniangm.ir/app/products.json";
+//    private static String url = "http://api.androidhive.info/contacts/";
+
+    // JSON Node names
+    private static final String TAG_PRODUCTS = "products";
+
+    private ProgressDialog pDialog;
     boolean doubleBackToExitPressedOnce = false;
+    DatabaseHelper db = new DatabaseHelper(this);
+    TextView tvLastUpdate = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,7 +51,6 @@ public class MainActivity extends Activity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.main);
 
-        DatabaseHelper db = new DatabaseHelper(this);
         List<Part> ps = db.getAllParts();
         if (ps.size() == 0) {
             insertAllRecords();
@@ -31,8 +58,10 @@ public class MainActivity extends Activity {
             Toast.makeText(this, ps.size() + " records already defined...", Toast.LENGTH_SHORT).show();
 
 
-        Integer a = db.getLastEditDate();
-        Toast.makeText(this, "last update: " + a.toString(), Toast.LENGTH_SHORT).show();
+//        db.insertLastEdit();
+        Long a = db.getLastEditDate();
+        tvLastUpdate = (TextView) findViewById(R.id.tvLastUpdate);
+        tvLastUpdate.setText("updated at: " + a);
 
         ActionBar bar = getActionBar();
         if (bar != null) {
@@ -74,6 +103,14 @@ public class MainActivity extends Activity {
         overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_right);
     }
 
+    public void readJsonFromAsset(View view) {
+        if (isNetworkAvailable())
+            new RefreshProducts().execute();
+        else
+            Toast.makeText(this, getString(R.string.internet_connection_not_present), Toast.LENGTH_SHORT).show();
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -99,6 +136,7 @@ public class MainActivity extends Activity {
             super.onBackPressed();
             return;
         }
+
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, getString(R.string.two_tap_to_exit), Toast.LENGTH_SHORT).show();
         new Handler().postDelayed(new Runnable() {
@@ -109,6 +147,103 @@ public class MainActivity extends Activity {
         }, 2000);
     }
 
+
+    private class RefreshProducts extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog.setMessage(getString(R.string.refresh_products));
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            JSONArray parts = null;
+            DefaultHttpClient httpClient = new DefaultHttpClient(new BasicHttpParams());
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setHeader("Content-type", "application/json");
+
+            InputStream inputStream = null;
+            String jsonStr = null;
+            try {
+                HttpResponse response = httpClient.execute(httpPost);
+                HttpEntity entity = response.getEntity();
+
+                inputStream = entity.getContent();
+                // json is UTF-8 by default
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
+                StringBuilder sb = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                jsonStr = sb.toString();
+            } catch (Exception e) {
+                // Oops
+            } finally {
+                try {
+                    if (inputStream != null) inputStream.close();
+                } catch (Exception squish) {
+                }
+            }
+
+            Log.d("Response: ", "> " + jsonStr);
+
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    parts = jsonObj.getJSONArray(TAG_PRODUCTS);
+//                    parts = jsonObj.getJSONArray("contacts");
+                    for (int i = 0; i < parts.length(); i++) {
+                        JSONObject c = parts.getJSONObject(i);
+
+                        String id = c.getString("id");
+                        String desc = c.getString("description");
+                        String carType = c.getString("type");
+                        String status = c.getString("status");
+
+                        if (db.getPartById(Integer.valueOf(id)) != null)
+                            db.updatePart(new Part(Integer.valueOf(id), desc, Integer.valueOf(carType), Integer.valueOf(status)));
+                        else
+                            db.insertPart(new Part(Integer.valueOf(id), desc, Integer.valueOf(carType), Integer.valueOf(status)));
+
+//                        Toast.makeText(MainActivity.this, id + " " + desc + " به روز رسانی شد.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+            long currentTime = db.updateLastModified();
+            tvLastUpdate = (TextView) findViewById(R.id.tvLastUpdate);
+            tvLastUpdate.setText("updated at: " + currentTime);
+
+            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+        }
+
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
     private void insertAllRecords() {
         DatabaseHelper db = new DatabaseHelper(this);
@@ -297,4 +432,6 @@ public class MainActivity extends Activity {
 
         Toast.makeText(this, " all records inserted successfully...", Toast.LENGTH_SHORT).show();
     }
+
+
 }
