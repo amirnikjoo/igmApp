@@ -19,16 +19,17 @@
     <string name="btn_ok">تایید</string>
     <string name="btn_cancel">انصراف</string>
     <string name="already_added_to_cart">این قطعه قبلا به لیست اضافه شده است.</string>
-    <string name="reside_in_clipboard">لیست درخواستی در حافظه کپی شد.</string>
-    <string name="no_data_to_send">داده ای برای ارسال انتخاب نشده است.</string>
+    <string name="reside_in_clipboard">سبد سفارش در حافظه کپی شد.</string>
+    <string name="no_data_to_send">قطعات مورد نظر را انتخاب فرمایید.</string>
     <string name="telegram_not_installed">تلگرام نصب نشده است.</string>
     <string name="item_deleted">قطعه مورد نظر حذف شد.</string>
     <string name="are_you_sure_to_delete_all">تمامی قطعات لیست حذف شوند؟</string>
     <string name="positive_answer">بله</string>
     <string name="negative_answer">خیر</string>
-    <string name="version">نسخه 1.0</string>
+    <string name="version">Ver 1.0</string>
+    <string name="updated_at">Last syncing:</string>
+    <string name="ashrafi_mobile">00989122902325</string>
     <string name="two_tap_to_exit">برای خروج دوبار کلید برگشت را فشار دهید.</string>
-    <string name="button_read_url_json">خواندن از فایل آنلاین</string>
-    <string name="refresh_products"> به روز رسانی اطلاعات... </string>
+    <string name="greeting_after_insert">سلام، وقت بخیر</string>
     <string name="internet_connection_not_present">اتصال به اینترنت برقرار نیست</string>
 </resources>

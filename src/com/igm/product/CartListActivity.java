@@ -226,7 +226,7 @@ public class CartListActivity extends Activity {
 
         String out = getCartListContent();
         if (out.length() > 0) {
-            Uri smsToUri = Uri.parse("smsto: 00989125681656");
+            Uri smsToUri = Uri.parse("smsto: " + getString(R.string.ashrafi_mobile));
             Intent intent = new Intent(android.content.Intent.ACTION_SENDTO, smsToUri);
             intent.putExtra("sms_body", out);
             startActivity(intent);
@@ -270,8 +270,8 @@ public class CartListActivity extends Activity {
         if (out.length() > 0) {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("message/rfc822");
-            i.putExtra(Intent.EXTRA_EMAIL, new String[]{"amirnikjoo@yahoo.com"});
-            i.putExtra(Intent.EXTRA_SUBJECT, "سفارش");
+            i.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@iraniangm.ir"});
+            i.putExtra(Intent.EXTRA_SUBJECT, "سفارش قطعه");
             i.putExtra(Intent.EXTRA_TEXT, out);
             try {
                 startActivity(Intent.createChooser(i, "Send via..."));

@@ -99,9 +99,4 @@ public class ProductArrayAdapter extends BaseAdapter implements ListAdapter, Fil
 
         return filter;
     }
-
-    static class MyProductViewHolder {
-        public TextView txtDesc;
-        public TextView txtCarType;
-    }
 }

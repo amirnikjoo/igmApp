@@ -106,9 +106,9 @@
                     android:layout_below="@id/tvVersion"
                     />
 
-            <Button
+<!--            <Button
                     android:id="@+id/buttonReadJsonFromAsset"
-                    android:text="@string/button_read_url_json"
+                    android:text="@string/refresh_products"
                     android:textColor="@color/igm_pure_white"
                     android:textSize="@dimen/normalbutton"
                     android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
                     android:layout_below="@id/tvLastUpdate"
                     android:layout_margin="@dimen/normalbuttonmargin"
                     android:onClick="readJsonFromAsset"
-                    />
+                    />-->
             <!--
 
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"

@@ -53,8 +53,7 @@ public class ProductListActivity extends Activity {
         Integer i = (Integer) bundle.get(Constants.INTENT_KEY_CAR_TYPE);
 
         DatabaseHelper db = new DatabaseHelper(this);
-        parts = db.getAllPartsByCarType(i);
-
+        parts = db.getPartsByCarType(i);
         adapter = new ProductArrayAdapter(this, parts);
         lv.setAdapter(adapter);
 
