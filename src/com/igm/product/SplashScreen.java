@@ -67,13 +67,6 @@ public class SplashScreen extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-/*
-            // Showing progress dialog
-            pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage(getString(R.string.refresh_products));
-            pDialog.setCancelable(false);
-            pDialog.show();
-*/
         }
 
         @Override
