@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ProductArrayAdapter extends BaseAdapter implements ListAdapter, Filterable {
     private final Context context;
-//    private PartList parts;
+    //    private PartList parts;
     private List<Part> parts;
     private List<Part> allParts;
 //    private PartList allParts;
@@ -78,7 +78,9 @@ public class ProductArrayAdapter extends BaseAdapter implements ListAdapter, Fil
                 } else {
                     for (int i = 0; i < allParts.size(); i++) {
                         Part p = allParts.get(i);
-                        if (p.getDescription().contains(charSequence)) {
+
+                        String searchPhrase = doReplaceNumbers((String) charSequence);
+                        if (p.getDescription().contains(searchPhrase)) {
                             filteredList.add(p);
                         }
                     }
@@ -98,5 +100,69 @@ public class ProductArrayAdapter extends BaseAdapter implements ListAdapter, Fil
         };
 
         return filter;
+    }
+
+    private static int ascii2windows1256(int ascii) {
+        int code = ascii;
+        switch (ascii) {
+            case 1776:       //0
+                code = 48;
+                break;
+
+            case 1777:       //1
+                code = 49;
+                break;
+
+            case 1778:      //2
+                code = 50;
+                break;
+
+            case 1779:        //3
+                code = 51;
+                break;
+
+            case 1780:        //4
+            case 1636:
+                code = 52;
+                break;
+
+            case 1781:       //5
+                code = 53;
+                break;
+
+            case 1782:      //6
+                code = 54;
+                break;
+
+            case 1783:       //7
+                code = 55;
+                break;
+
+            case 1784:       //8
+                code = 56;
+                break;
+
+            case 1785:      //9
+                code = 57;
+                break;
+
+            default:
+//                if (ascii > 256)
+//                    code = 0x8C;//Iran system '?'
+//                else
+                code = ascii;
+        }
+        return code;
+    }
+
+
+    public static String doReplaceNumbers(String str) {
+        StringBuilder filtered = new StringBuilder(str.length());
+        for (int i = 0; i < str.length(); i++) {
+            char current = str.charAt(i);
+            filtered.append((char) ascii2windows1256(current));
+        }
+
+        return filtered.toString();
     }
 }
